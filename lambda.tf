@@ -26,4 +26,13 @@ resource "aws_lambda_function" "sample_lambda" {
 
   filename         = "lambda_package.zip"
   source_code_hash = filebase64sha256("lambda_package.zip")
+
+
+  tags = {
+    Environment = "dev"
+    Project     = "NodeLambdaProject"
+    Owner       = "dev"
+    name = "cbd-dev-lambda"
+
+  }
 }
