@@ -18,7 +18,8 @@ jobs:
                 node-version: '18'
 
             - name: clean old dependencies
-              run: rm -rf node_modules package-lock.json
+              run: |
+                rm -rf node_modules package-lock.json lambda_package.zip
 
             - name: install dependencies
               run: npm install
@@ -32,13 +33,13 @@ jobs:
 
             - name: build lambda deployment package
               run: |
-                zip -r lambda_package.zip . -x "*.git*" "*.github*"
+                zip -r lambda_package.zip index.js app.js node_modules package.json package-lock.json
 
-            - name: Upload Lambda package artifact
-              uses: actions/upload-artifact@v4
-              with:
-                name: lambda_package
-                path: lambda_package.zip
+            #- name: Upload Lambda package artifact
+              #uses: actions/upload-artifact@v4
+              #with:
+                #name: lambda_package
+                #path: lambda_package.zip
 
 
             - name: deploy lambda function
