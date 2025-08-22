@@ -34,6 +34,12 @@ jobs:
               run: |
                 zip -r lambda_package.zip . -x "*.git*" "*.github*"
 
+            - name: Upload Lambda package artifact
+              uses: actions/upload-artifact@v3
+              with:
+                name: lambda_package
+                path: lambda_package.zip
+
 
             - name: deploy lambda function
               uses: appleboy/lambda-action@v0.2.0
