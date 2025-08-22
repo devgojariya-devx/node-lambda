@@ -21,7 +21,7 @@ resource "aws_apigatewayv2_route" "default_route" {
 
 resource "aws_apigatewayv2_stage" "default" {
   api_id = aws_apigatewayv2_api.http_api.id
-  name = "example-stage"
+  name = "dev"
   auto_deploy = true
 }
 
