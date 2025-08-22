@@ -50,10 +50,13 @@ const app = require('./app');
 const handler = serverlessExpress({ app });
 
 exports.handler = async (event, context) => {
-  // Handle API Gateway HTTP API v2.0 event normalization for root path
+  console.log("Received event:", JSON.stringify(event, null, 2));       // Log for debugging
+  console.log("Execution context:", JSON.stringify(context, null, 2));   // Log for debugging
+
+  // Normalize event for API Gateway HTTP API v2.0
   if (event.version === '2.0') {
     event.rawPath = event.rawPath || event.path || '/';
-    
+
     if (!event.requestContext.http) {
       event.requestContext.http = {
         method: event.requestContext?.httpMethod || 'GET',
@@ -63,4 +66,5 @@ exports.handler = async (event, context) => {
 
   return handler(event, context);
 };
+
 
