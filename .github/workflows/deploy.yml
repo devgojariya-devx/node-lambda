@@ -17,15 +17,23 @@ jobs:
               with:
                 node-version: '18'
 
+            - name: clean old dependencies
+              run: rm -rf node_modules package-lock.json
+
             - name: install dependencies
-              run: npm ci
+              run: npm install
 
             - name: prune dev dependencies
               run: npm prune --production
 
+            #- name: build lambda deployment package
+              #run: |
+                #zip -r lambda_package.zip index.js app.js node_modules
+
             - name: build lambda deployment package
               run: |
-                zip -r lambda_package.zip index.js app.js node_modules
+                zip -r lambda_package.zip . -x "*.git*" "*.github*"
+
 
             - name: deploy lambda function
               uses: appleboy/lambda-action@v0.2.0
