@@ -172,3 +172,9 @@ Thumbs.db
 # yarn.lock
 
 lambda_package.zip
+
+package.json
+
+package-lock.json
+
+event_main.json
